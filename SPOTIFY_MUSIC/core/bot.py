@@ -57,29 +57,19 @@ class BABY(Client):
         self.username = self.me.username
         self.mention = self.me.mention
 
-        try:
-            await self.send_message(
-                chat_id=config.LOGGER_ID,
-                text=f"<u><b>» {self.mention} ʙᴏᴛ sᴛᴀʀᴛᴇᴅ :</b><u>\n\nɪᴅ : <code>{self.id}</code>\nɴᴀᴍᴇ : {self.name}\nᴜsᴇʀɴᴀᴍᴇ : @{self.username}",
-            )
-        except (errors.ChannelInvalid, errors.PeerIdInvalid):
-            LOGGER(__name__).error(
-                "Bot has failed to access the log group/channel. Make sure that you have added your bot to your log group/channel."
-            )
-            exit()
-        except Exception as ex:
-            LOGGER(__name__).error(
-                f"Bot has failed to access the log group/channel.\n  Reason : {type(ex).__name__}."
-            )
-            exit()
+try:
+    logger_chat = await self.get_chat(config.LOGGER_ID)
 
-        a = await self.get_chat_member(config.LOGGER_ID, self.id)
-        if a.status != ChatMemberStatus.ADMINISTRATOR:
-            LOGGER(__name__).error(
-                "Please promote your bot as an admin in your log group/channel."
-            )
-            exit()
-        LOGGER(__name__).info(f"Music Bot Started as {self.name}")
+    await self.send_message(
+        chat_id=logger_chat.id,
+        text=f"<u><b>» {self.mention} ʙᴏᴛ sᴛᴀʀᴛᴇᴅ :</b></u>\n\n"
+             f"ɪᴅ : <code>{self.id}</code>\n"
+             f"ɴᴀᴍᴇ : {self.name}\n"
+             f"ᴜsᴇʀɴᴀᴍᴇ : @{self.username}",
+    )
 
-    async def stop(self):
-        await super().stop()
+except Exception as ex:
+    LOGGER(__name__).error(
+        f"LOGGER ERROR: {type(ex).__name__}: {ex}"
+    )
+    exit()
