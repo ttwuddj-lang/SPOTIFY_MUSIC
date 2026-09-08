@@ -1,4 +1,3 @@
-
 # ======================================================================
 # ||                                                               ||
 # ||   ██████╗  █████╗ ██████╗ ██╗   ██╗███████╗███████╗██╗ ██████╗  ||
@@ -57,19 +56,20 @@ class BABY(Client):
         self.username = self.me.username
         self.mention = self.me.mention
 
-try:
-    logger_chat = await self.get_chat(config.LOGGER_ID)
+    try:
+        logger_chat = await self.get_chat(config.LOGGER_ID)
 
-    await self.send_message(
-        chat_id=logger_chat.id,
-        text=f"<u><b>» {self.mention} ʙᴏᴛ sᴛᴀʀᴛᴇᴅ :</b></u>\n\n"
-             f"ɪᴅ : <code>{self.id}</code>\n"
-             f"ɴᴀᴍᴇ : {self.name}\n"
-             f"ᴜsᴇʀɴᴀᴍᴇ : @{self.username}",
-    )
+        await self.send_message(
+            chat_id=logger_chat.id,
+            text=f"<u><b>» {self.mention} ʙᴏᴛ sᴛᴀʀᴛᴇᴅ :</b></u>\n\n"
+                 f"ɪᴅ : <code>{self.id}</code>\n"
+                 f"ɴᴀᴍᴇ : {self.name}\n"
+                 f"ᴜsᴇʀɴᴀᴍᴇ : @{self.username}",
+        )
 
-except Exception as ex:
-    LOGGER(__name__).error(
-        f"LOGGER ERROR: {type(ex).__name__}: {ex}"
-    )
-    exit()
+    except Exception as ex:
+        LOGGER(__name__).error(
+            f"LOGGER ERROR: {type(ex).__name__}: {ex}"
+        )
+        exit()
+        
