@@ -47,12 +47,13 @@ from config import BANNED_USERS
 
 async def init():
     if (
-        not config.STRING1
-        and not config.STRING2
-        and not config.STRING3
-        and not config.STRING4
-        and not config.STRING5
+        not getattr(config, "STRING1", "")
+        and not getattr(config, "STRING2", "")
+        and not getattr(config, "STRING3", "")
+        and not getattr(config, "STRING4", "")
+        and not getattr(config, "STRING5", "")
     ):
+https://chatgpt.com/c/6a9fa284-341c-83e8-a994-d290b0c41163
         LOGGER(__name__).error("Assistant client variables not defined, exiting...")
         exit()
     await sudo()
