@@ -50,11 +50,11 @@ class BABY(Client):
         )
 
     async def start(self):
-        await super().start()
-        self.id = self.me.id
-        self.name = self.me.first_name + " " + (self.me.last_name or "")
-        self.username = self.me.username
-        self.mention = self.me.mention
+    await super().start()
+    self.id = self.me.id
+    self.name = self.me.first_name + " " + (self.me.last_name or "")
+    self.username = self.me.username
+    self.mention = self.me.mention
 
     try:
         logger_chat = await self.get_chat(config.LOGGER_ID)
